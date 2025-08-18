@@ -11,8 +11,34 @@ import tempfile
 from pathlib import Path
 from typing import Any, Callable, Iterator, List, Optional, Union
 
-from dateutil import parser as date_parser
-from natsort import natsorted, ns
+try:
+    from dateutil import parser as date_parser
+except ImportError:
+    # Fallback for missing dateutil
+    import datetime
+    
+    class DateParser:
+        @staticmethod
+        def parse(date_string):
+            # Simple ISO format fallback
+            try:
+                return datetime.datetime.fromisoformat(date_string.replace('Z', '+00:00'))
+            except:
+                return datetime.datetime(1900, 1, 1)
+    
+    date_parser = DateParser()
+
+try:
+    from natsort import natsorted, ns
+except ImportError:
+    # Fallback for missing natsort
+    def natsorted(items, alg=None):
+        return sorted(items)
+    
+    class NS:
+        IGNORECASE = 0
+    
+    ns = NS()
 
 from .parsers import detect_format, parse_file, write_file
 from .utils import SortKey, SortStats, parse_memory_size

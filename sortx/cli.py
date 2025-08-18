@@ -9,39 +9,62 @@ import sys
 from pathlib import Path
 from typing import List, Optional
 
-import typer
-from rich.console import Console
-from rich.table import Table
+try:
+    import typer
+    from rich.console import Console
+    from rich.table import Table
+    TYPER_AVAILABLE = True
+except ImportError:
+    TYPER_AVAILABLE = False
+    # Fallback for missing typer/rich
+    class Console:
+        def print(self, *args, **kwargs):
+            print(*args)
+    
+    console = Console()
 
-from . import sort_file
-from .utils import SortKey, parse_key_spec, parse_memory_size, validate_sort_keys
+if TYPER_AVAILABLE:
+    from . import sort_file
+    from .utils import SortKey, parse_key_spec, parse_memory_size, validate_sort_keys
 
-# Create Typer app
-app = typer.Typer(
-    name="sortx",
-    help="Universal sorting tool for files and data structures",
-    add_completion=False,
-)
+    # Create Typer app
+    app = typer.Typer(
+        name="sortx",
+        help="Universal sorting tool for files and data structures",
+        add_completion=False,
+    )
 
-# Rich console for pretty output
-console = Console()
+    # Rich console for pretty output
+    console = Console()
 
 
-def _validate_inputs(input_file: str, memory_limit: Optional[str]) -> None:
-    """Validate CLI inputs."""
-    # Validate input file
-    input_path = Path(input_file)
-    if not input_path.exists():
-        console.print(f"[red]Error:[/red] Input file '{input_file}' not found")
-        raise typer.Exit(1)
+def main():
+    """Simple fallback main function."""
+    if not TYPER_AVAILABLE:
+        print("sortx CLI requires additional dependencies.")
+        print("Install with: pip install sortx[full]")
+        return
+    
+    # The actual typer app main function will be defined below
+    app()
 
-    # Validate memory limit format
-    if memory_limit:
-        try:
-            parse_memory_size(memory_limit)
-        except ValueError as e:
-            console.print(f"[red]Error:[/red] {e}")
+
+if TYPER_AVAILABLE:
+    def _validate_inputs(input_file: str, memory_limit: Optional[str]) -> None:
+        """Validate CLI inputs."""
+        # Validate input file
+        input_path = Path(input_file)
+        if not input_path.exists():
+            console.print(f"[red]Error:[/red] Input file '{input_file}' not found")
             raise typer.Exit(1)
+
+        # Validate memory limit format
+        if memory_limit:
+            try:
+                parse_memory_size(memory_limit)
+            except ValueError as e:
+                console.print(f"[red]Error:[/red] {e}")
+                raise typer.Exit(1)
 
 
 def _parse_sort_keys(

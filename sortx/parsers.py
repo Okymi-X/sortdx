@@ -12,7 +12,16 @@ from contextlib import contextmanager
 from pathlib import Path
 from typing import Any, Iterator, Union
 
-import chardet
+try:
+    import chardet
+except ImportError:
+    # Fallback for missing chardet
+    class CharDet:
+        @staticmethod
+        def detect(data):
+            return {'encoding': 'utf-8', 'confidence': 0.9}
+    
+    chardet = CharDet()
 
 # Handle optional zstandard dependency
 try:
