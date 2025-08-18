@@ -1,25 +1,25 @@
 # sortdx
 
-Un utilitaire de tri de fichiers puissant et flexible pour Python qui gère intelligemment les fichiers CSV, JSONL et texte.
+A powerful and flexible file sorting utility for Python that intelligently handles CSV, JSONL, and text files.
 
-## 🚀 Démarrage Rapide
+## 🚀 Quick Start
 
 ```bash
 pip install sortdx
 ```
 
-### Utilisation de Base
+### Basic Usage
 
 ```python
 import sortdx
 
-# Trier un CSV par colonne âge
+# Sort a CSV by age column
 sortdx.sort_file('data.csv', 'sorted.csv', keys=[sortdx.key('age', 'num')])
 
-# Trier un JSONL par timestamp
+# Sort a JSONL by timestamp
 sortdx.sort_file('logs.jsonl', 'sorted_logs.jsonl', keys=[sortdx.key('timestamp')])
 
-# Trier un fichier texte par la 3ème colonne numériquement
+# Sort a text file by 3rd column numerically
 sortdx.sort_file('data.txt', 'sorted.txt', keys=[sortdx.key(3, 'num')])
 ```
 
@@ -29,142 +29,142 @@ sortdx.sort_file('data.txt', 'sorted.txt', keys=[sortdx.key(3, 'num')])
 pip install sortdx
 ```
 
-Pour utiliser l'interface en ligne de commande (optionnel) :
+To use the command line interface (optional):
 ```bash
 pip install "sortdx[cli]"
 ```
 
-## 🔧 Fonctionnalités
+## 🔧 Features
 
-- **Détection Intelligente de Format** : Détecte automatiquement les formats CSV, JSONL et texte
-- **Clés de Tri Multiples** : Tri par plusieurs colonnes/champs avec différents types de données
-- **Efficace en Mémoire** : Gère de gros fichiers sans tout charger en mémoire
-- **Tri Conscient du Type** : Support du tri string, numérique et date/heure
-- **Entrée Flexible** : Fonctionne avec des chemins de fichiers ou des objets file-like
-- **Statistiques** : Statistiques de tri optionnelles et rapport de progression
+- **Intelligent Format Detection**: Automatically detects CSV, JSONL, and text formats
+- **Multiple Sort Keys**: Sort by multiple columns/fields with different data types
+- **Memory Efficient**: Handles large files without loading everything into memory
+- **Type-Aware Sorting**: Support for string, numeric, and date/time sorting
+- **Flexible Input**: Works with file paths or file-like objects
+- **Statistics**: Optional sorting statistics and progress reporting
 
-## 📖 Utilisation
+## 📖 Usage
 
-### Clés de Tri
+### Sort Keys
 
-Créez des clés de tri avec la fonction `sortdx.key()` :
+Create sort keys using the `sortdx.key()` function:
 
 ```python
 import sortdx
 
-# Tri textuel (par défaut)
+# String sorting (default)
 key1 = sortdx.key('name')
-key1 = sortdx.key(1)  # Index de colonne pour fichiers texte
+key1 = sortdx.key(1)  # Column index for text files
 
-# Tri numérique
+# Numeric sorting
 key2 = sortdx.key('age', 'num')
 key2 = sortdx.key(2, 'num')
 
-# Tri inversé
+# Reverse sorting
 key3 = sortdx.key('name', reverse=True)
 ```
 
-### Formats de Fichiers
+### File Formats
 
-#### Fichiers CSV
+#### CSV Files
 ```python
-# Tri par une seule colonne
+# Sort by single column
 sortdx.sort_file('data.csv', 'output.csv', keys=[sortdx.key('age', 'num')])
 
-# Tri par plusieurs colonnes
+# Sort by multiple columns
 sortdx.sort_file('data.csv', 'output.csv', keys=[
     sortdx.key('department'),
     sortdx.key('salary', 'num', reverse=True)
 ])
 ```
 
-#### Fichiers JSONL
+#### JSONL Files
 ```python
-# Tri de fichiers JSON Lines
+# Sort JSON Lines files
 sortdx.sort_file('logs.jsonl', 'sorted.jsonl', keys=[
     sortdx.key('timestamp'),
     sortdx.key('priority', 'num')
 ])
 ```
 
-#### Fichiers Texte
+#### Text Files
 ```python
-# Tri par index de colonne (base 1)
+# Sort by column index (1-based)
 sortdx.sort_file('data.txt', 'sorted.txt', keys=[sortdx.key(2, 'num')])
 
-# Délimiteur personnalisé
+# Custom delimiter
 sortdx.sort_file('data.txt', 'sorted.txt', 
                 keys=[sortdx.key(1)],
                 delimiter='|')
 ```
 
-### Options Avancées
+### Advanced Options
 
 ```python
-# Obtenir des statistiques de tri
+# Get sorting statistics
 stats = sortdx.sort_file('large_file.csv', 'sorted.csv', 
                         keys=[sortdx.key('id', 'num')],
                         stats=True)
-print(f"Traité {stats.lines_processed} lignes")
+print(f"Processed {stats.lines_processed} lines")
 
-# Tri efficace en mémoire pour gros fichiers
+# Memory-efficient sorting for large files
 sortdx.sort_file('huge_file.csv', 'sorted.csv',
                 keys=[sortdx.key('timestamp')],
-                max_memory_mb=500)  # Limiter l'usage mémoire
+                max_memory_mb=500)  # Limit memory usage
 ```
 
-## 🔄 Types de Données
+## 🔄 Data Types
 
-- `'str'` ou `'text'` : Tri string/texte (par défaut)
-- `'num'` ou `'numeric'` : Tri numérique (gère entiers et flottants)
-- `'date'` ou `'datetime'` : Tri date/heure (format ISO recommandé)
+- `'str'` or `'text'`: String/text sorting (default)
+- `'num'` or `'numeric'`: Numeric sorting (handles integers and floats)
+- `'date'` or `'datetime'`: Date/time sorting (ISO format recommended)
 
-## 📊 Exemples
+## 📊 Examples
 
-### Exemple 1 : Données Employés (CSV)
+### Example 1: Employee Data (CSV)
 ```python
 import sortdx
 
-# Contenu employees.csv :
+# employees.csv content:
 # name,age,department,salary
 # Alice,25,Engineering,75000
 # Bob,30,Sales,65000
 # Carol,28,Engineering,80000
 
-# Tri par département, puis par salaire (plus élevé en premier)
+# Sort by department, then by salary (highest first)
 sortdx.sort_file('employees.csv', 'sorted_employees.csv', keys=[
     sortdx.key('department'),
     sortdx.key('salary', 'num', reverse=True)
 ])
 ```
 
-### Exemple 2 : Fichiers de Log (JSONL)
+### Example 2: Log Files (JSONL)
 ```python
-# Contenu logs.jsonl :
+# logs.jsonl content:
 # {"timestamp": "2024-01-01T10:00:00Z", "level": "INFO", "message": "Start"}
 # {"timestamp": "2024-01-01T10:01:00Z", "level": "ERROR", "message": "Failed"}
 
-# Tri par timestamp
+# Sort by timestamp
 sortdx.sort_file('logs.jsonl', 'sorted_logs.jsonl', keys=[
     sortdx.key('timestamp')
 ])
 ```
 
-### Exemple 3 : Données Séparées par Espaces (TXT)
+### Example 3: Space-Separated Data (TXT)
 ```python
-# Contenu data.txt :
+# data.txt content:
 # Alice 25 Engineering 75000
 # Bob 30 Sales 65000
 
-# Tri par 4ème colonne (salaire) numériquement
+# Sort by 4th column (salary) numerically
 sortdx.sort_file('data.txt', 'sorted_data.txt', keys=[
     sortdx.key(4, 'num', reverse=True)
 ])
 ```
 
-## 🧪 Tests Réels
+## 🧪 Real-World Tests
 
-Le package a été testé avec succès sur :
+The package has been successfully tested on:
 
 ### CSV
 ```csv
@@ -174,7 +174,7 @@ Diana,28,55000
 Bob,30,50000
 Charlie,35,60000
 ```
-**Tri par âge** → Alice (25), Diana (28), Bob (30), Charlie (35) ✅
+**Sort by age** → Alice (25), Diana (28), Bob (30), Charlie (35) ✅
 
 ### JSONL
 ```jsonl
@@ -183,7 +183,7 @@ Charlie,35,60000
 {"name": "Bob", "age": 30, "timestamp": "2025-01-15T10:30:00Z"}
 {"name": "Charlie", "age": 35, "timestamp": "2025-01-15T11:45:00Z"}
 ```
-**Tri par âge** → Même ordre que CSV ✅
+**Sort by age** → Same order as CSV ✅
 
 ### TXT
 ```
@@ -193,78 +193,78 @@ file1.txt
 file20.txt
 file3.txt
 ```
-**Tri numérique par 3ème colonne** → Ordre correct selon valeurs numériques ✅
+**Numeric sort by 3rd column** → Correct order based on numeric values ✅
 
 ## 🎯 Performance
 
-sortdx est conçu pour l'efficacité :
+sortdx is designed for efficiency:
 
-- **Usage mémoire** : Limites mémoire configurables pour traitement de gros fichiers
-- **Vitesse** : Algorithmes de tri optimisés avec overhead minimal
-- **Évolutivité** : Gère efficacement les fichiers de KB à GB
+- **Memory Usage**: Configurable memory limits for processing large files
+- **Speed**: Optimized sorting algorithms with minimal overhead
+- **Scalability**: Efficiently handles files from KB to GB sizes
 
-## 📈 Statistiques de Tri
+## 📈 Sort Statistics
 
 ```python
 import sortdx
 
-# Obtenir des statistiques détaillées
+# Get detailed statistics
 stats = sortdx.sort_file('data.csv', 'sorted.csv', 
                         keys=[sortdx.key('age', 'num')], 
                         stats=True)
 
-print(f"Lignes traitées : {stats.lines_processed}")
-print(f"Temps de tri : {stats.sort_time:.2f}s") 
-print(f"Mémoire utilisée : {stats.memory_used_mb:.1f}MB")
+print(f"Lines processed: {stats.lines_processed}")
+print(f"Sort time: {stats.sort_time:.2f}s") 
+print(f"Memory used: {stats.memory_used_mb:.1f}MB")
 ```
 
-## 🔗 API Référence
+## 🔗 API Reference
 
 ### `sortdx.sort_file(input_path, output_path, keys, **options)`
 
-Trie un fichier selon les clés spécifiées.
+Sorts a file according to specified keys.
 
-**Paramètres :**
-- `input_path` (str) : Chemin du fichier d'entrée
-- `output_path` (str) : Chemin du fichier de sortie
-- `keys` (List[SortKey]) : Liste des clés de tri
-- `delimiter` (str, optionnel) : Délimiteur pour fichiers texte (défaut: auto-détection)
-- `stats` (bool, optionnel) : Retourner des statistiques (défaut: False)
-- `max_memory_mb` (int, optionnel) : Limite mémoire en MB
+**Parameters:**
+- `input_path` (str): Input file path
+- `output_path` (str): Output file path
+- `keys` (List[SortKey]): List of sort keys
+- `delimiter` (str, optional): Delimiter for text files (default: auto-detection)
+- `stats` (bool, optional): Return statistics (default: False)
+- `max_memory_mb` (int, optional): Memory limit in MB
 
-**Retour :**
-- `SortStats` si stats=True, sinon None
+**Returns:**
+- `SortStats` if stats=True, otherwise None
 
 ### `sortdx.key(field, type='str', reverse=False)`
 
-Crée une clé de tri.
+Creates a sort key.
 
-**Paramètres :**
-- `field` (str|int) : Nom de champ (CSV/JSONL) ou index de colonne (TXT)
-- `type` (str) : Type de données ('str', 'num', 'date')
-- `reverse` (bool) : Tri inversé
+**Parameters:**
+- `field` (str|int): Field name (CSV/JSONL) or column index (TXT)
+- `type` (str): Data type ('str', 'num', 'date')
+- `reverse` (bool): Reverse sort
 
-## 📄 Licence
+## 📄 License
 
-Licence MIT - voir le fichier [LICENSE](LICENSE) pour les détails.
+MIT License - see the [LICENSE](LICENSE) file for details.
 
-## 🤝 Contribution
+## 🤝 Contributing
 
-Les contributions sont les bienvenues ! N'hésitez pas à soumettre une Pull Request.
+Contributions are welcome! Feel free to submit a Pull Request.
 
 ## 📞 Support
 
-Si vous rencontrez des problèmes ou avez des questions, veuillez [ouvrir une issue](https://github.com/yourusername/sortdx/issues) sur GitHub.
+If you encounter any issues or have questions, please [open an issue](https://github.com/yourusername/sortdx/issues) on GitHub.
 
 ## 🌐 PyPI
 
-Package disponible sur PyPI : https://pypi.org/project/sortdx/
+Package available on PyPI: https://pypi.org/project/sortdx/
 
 ## 🏷️ Version
 
-Version actuelle : **0.1.0**
+Current version: **0.1.1**
 
-Installation testée sur :
+Installation tested on:
 - Python 3.10+
 - Windows, macOS, Linux
-- Fichiers de quelques KB à plusieurs GB
+- Files from a few KB to several GB
