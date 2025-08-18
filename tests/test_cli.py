@@ -13,7 +13,7 @@ def test_basic_sort_functionality():
         {"name": "Alice", "age": 25},
         {"name": "Bob", "age": 30},
     ]
-    
+
     # Mock args
     class MockArgs:
         keys = ["age:num"]
@@ -22,9 +22,9 @@ def test_basic_sort_functionality():
         output = None
         format = None
         delimiter = None
-    
+
     args = MockArgs()
-    
+
     # Should sort by age
     sorted_data = basic_sort(data, args)
     ages = [item["age"] for item in sorted_data]
@@ -34,7 +34,7 @@ def test_basic_sort_functionality():
 def test_basic_sort_reverse():
     """Test reverse sorting."""
     data = [{"value": i} for i in [1, 3, 2, 5, 4]]
-    
+
     class MockArgs:
         keys = ["value:num"]
         reverse = True
@@ -42,9 +42,9 @@ def test_basic_sort_reverse():
         output = None
         format = None
         delimiter = None
-    
+
     args = MockArgs()
-    
+
     sorted_data = basic_sort(data, args)
     values = [item["value"] for item in sorted_data]
     assert values == [5, 4, 3, 2, 1]
@@ -57,7 +57,7 @@ def test_basic_sort_string_keys():
         {"name": "Alice"},
         {"name": "Bob"},
     ]
-    
+
     class MockArgs:
         keys = ["name:str"]
         reverse = False
@@ -65,9 +65,9 @@ def test_basic_sort_string_keys():
         output = None
         format = None
         delimiter = None
-    
+
     args = MockArgs()
-    
+
     sorted_data = basic_sort(data, args)
     names = [item["name"] for item in sorted_data]
     assert names == ["Alice", "Bob", "Charlie"]

@@ -13,14 +13,16 @@ try:
     import typer
     from rich.console import Console
     from rich.table import Table
+
     TYPER_AVAILABLE = True
 except ImportError:
     TYPER_AVAILABLE = False
+
     # Fallback for missing typer/rich
     class Console:
         def print(self, *args, **kwargs):
             print(*args)
-    
+
     console = Console()
 
 from .core import sort_iter
@@ -47,11 +49,11 @@ if TYPER_AVAILABLE:
 def basic_sort(data, args):
     """
     Basic sort function for testing and simple operations.
-    
+
     Args:
         data: List of items to sort
         args: Object with sorting configuration (keys, reverse, etc.)
-        
+
     Returns:
         List of sorted items
     """
@@ -59,16 +61,16 @@ def basic_sort(data, args):
     sort_keys = []
     for key_spec in args.keys:
         sort_keys.append(parse_key_spec(key_spec))
-    
+
     # Use sort_iter for the actual sorting
     sorted_iter = sort_iter(
         data=iter(data),
         keys=sort_keys,
         stable=True,
         reverse=args.reverse,
-        unique=getattr(args, 'unique', None)
+        unique=getattr(args, "unique", None),
     )
-    
+
     return list(sorted_iter)
 
 
@@ -78,12 +80,13 @@ def main():
         print("sortx CLI requires additional dependencies.")
         print("Install with: pip install sortx[full]")
         return
-    
+
     # The actual typer app main function will be defined below
     app()
 
 
 if TYPER_AVAILABLE:
+
     def _validate_inputs(input_file: str, memory_limit: Optional[str]) -> None:
         """Validate CLI inputs."""
         # Validate input file
@@ -210,9 +213,7 @@ def main(
         False, "--natural", help="Use natural sorting for all string columns"
     ),
     stats: bool = typer.Option(False, "--stats", help="Show sorting statistics"),
-    version: bool = typer.Option(
-        False, "--version", help="Show version information"
-    ),
+    version: bool = typer.Option(False, "--version", help="Show version information"),
 ) -> None:
     """
     Sort files and data structures with support for multiple formats and large datasets.
@@ -353,7 +354,9 @@ def show_data_types() -> None:
         "desc=true", "Sort in descending order", "price:num:desc=true"
     )
     options_table.add_row(
-        "locale=LOCALE", "Use specific locale for strings", "name:str:locale=fr_FR.UTF-8"
+        "locale=LOCALE",
+        "Use specific locale for strings",
+        "name:str:locale=fr_FR.UTF-8",
     )
 
     console.print(options_table)

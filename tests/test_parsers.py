@@ -35,11 +35,11 @@ def test_csv_reader():
 Alice,25,New York
 Bob,30,San Francisco
 Charlie,35,Chicago"""
-    
-    with tempfile.NamedTemporaryFile(mode='w', suffix='.csv', delete=False) as f:
+
+    with tempfile.NamedTemporaryFile(mode="w", suffix=".csv", delete=False) as f:
         f.write(csv_content)
         csv_file = Path(f.name)
-    
+
     try:
         # Test reading
         with CSVReader(csv_file) as reader:
@@ -55,14 +55,14 @@ Charlie,35,Chicago"""
 def test_jsonl_reader():
     """Test JSONL file reading."""
     # Create temporary JSONL file
-    jsonl_content = '''{"name": "Alice", "age": 25, "city": "New York"}
+    jsonl_content = """{"name": "Alice", "age": 25, "city": "New York"}
 {"name": "Bob", "age": 30, "city": "San Francisco"}
-{"name": "Charlie", "age": 35, "city": "Chicago"}'''
-    
-    with tempfile.NamedTemporaryFile(mode='w', suffix='.jsonl', delete=False) as f:
+{"name": "Charlie", "age": 35, "city": "Chicago"}"""
+
+    with tempfile.NamedTemporaryFile(mode="w", suffix=".jsonl", delete=False) as f:
         f.write(jsonl_content)
         jsonl_file = Path(f.name)
-    
+
     try:
         # Test reading
         with JSONLReader(jsonl_file) as reader:
@@ -81,11 +81,11 @@ def test_text_reader():
     text_content = """line 1
 line 2
 line 3"""
-    
-    with tempfile.NamedTemporaryFile(mode='w', suffix='.txt', delete=False) as f:
+
+    with tempfile.NamedTemporaryFile(mode="w", suffix=".txt", delete=False) as f:
         f.write(text_content)
         text_file = Path(f.name)
-    
+
     try:
         # Test reading
         with TextReader(text_file) as reader:
@@ -103,11 +103,11 @@ def test_parse_file_csv():
     csv_content = """name,age
 Alice,25
 Bob,30"""
-    
-    with tempfile.NamedTemporaryFile(mode='w', suffix='.csv', delete=False) as f:
+
+    with tempfile.NamedTemporaryFile(mode="w", suffix=".csv", delete=False) as f:
         f.write(csv_content)
         csv_file = Path(f.name)
-    
+
     try:
         with parse_file(csv_file) as reader:
             rows = list(reader)
@@ -124,13 +124,13 @@ def test_write_file_csv():
         {"name": "Alice", "age": 25},
         {"name": "Bob", "age": 30},
     ]
-    
-    with tempfile.NamedTemporaryFile(suffix='.csv', delete=False) as f:
+
+    with tempfile.NamedTemporaryFile(suffix=".csv", delete=False) as f:
         output_file = Path(f.name)
-    
+
     try:
         write_file(output_file, data)
-        
+
         # Read back and verify
         with parse_file(output_file) as reader:
             rows = list(reader)
@@ -147,19 +147,19 @@ def test_detect_csv_delimiter():
     csv_comma = "a,b,c\n1,2,3"
     csv_tab = "a\tb\tc\n1\t2\t3"
     csv_semicolon = "a;b;c\n1;2;3"
-    
-    with tempfile.NamedTemporaryFile(mode='w', suffix='.csv', delete=False) as f:
+
+    with tempfile.NamedTemporaryFile(mode="w", suffix=".csv", delete=False) as f:
         f.write(csv_comma)
         comma_file = Path(f.name)
-    
-    with tempfile.NamedTemporaryFile(mode='w', suffix='.tsv', delete=False) as f:
+
+    with tempfile.NamedTemporaryFile(mode="w", suffix=".tsv", delete=False) as f:
         f.write(csv_tab)
         tab_file = Path(f.name)
-    
-    with tempfile.NamedTemporaryFile(mode='w', suffix='.csv', delete=False) as f:
+
+    with tempfile.NamedTemporaryFile(mode="w", suffix=".csv", delete=False) as f:
         f.write(csv_semicolon)
         semicolon_file = Path(f.name)
-    
+
     try:
         assert detect_csv_delimiter(comma_file) == ","
         assert detect_csv_delimiter(tab_file) == "\t"
