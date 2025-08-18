@@ -2,11 +2,9 @@
 Test file parsing functionality.
 """
 
-import json
 import tempfile
 from pathlib import Path
 
-import pytest
 from sortx.parsers import (
     CSVReader,
     JSONLReader,
@@ -21,7 +19,7 @@ from sortx.parsers import (
 def test_detect_format():
     """Test file format detection."""
     assert detect_format("data.csv") == "csv"
-    assert detect_format("data.tsv") == "tsv" 
+    assert detect_format("data.tsv") == "tsv"
     assert detect_format("data.tab") == "tsv"
     assert detect_format("data.jsonl") == "jsonl"
     assert detect_format("data.ndjson") == "jsonl"

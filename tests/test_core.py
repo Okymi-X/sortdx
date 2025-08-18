@@ -2,9 +2,7 @@
 Test core sorting functionality.
 """
 
-import pytest
 from sortx.core import key, sort_iter, _extract_value, _convert_value
-from sortx.utils import SortKey
 
 
 def test_key_creation():

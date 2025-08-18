@@ -10,7 +10,7 @@ import gzip
 import json
 from contextlib import contextmanager
 from pathlib import Path
-from typing import Any, Dict, Iterator, List, Union
+from typing import Any, Iterator, Union
 
 import chardet
 
@@ -90,7 +90,9 @@ def _get_file_opener(file_path: Path):
         return gzip.open
     elif suffix in ('.zst', '.zstd'):
         if not ZSTD_AVAILABLE:
-            raise ImportError("zstandard not installed. Install with: pip install zstandard")
+            raise ImportError(
+                "zstandard not installed. Install with: pip install zstandard"
+            )
         return lambda path, mode: zstd.open(path, mode)
     else:
         return open

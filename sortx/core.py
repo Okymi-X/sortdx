@@ -5,20 +5,17 @@ This module provides the main sorting algorithms and key creation functions
 for in-memory and file-based sorting operations.
 """
 
-import gzip
 import heapq
 import locale
-import os
 import tempfile
-from functools import cmp_to_key
 from pathlib import Path
-from typing import Any, Callable, Dict, Iterator, List, Optional, Union
+from typing import Any, Callable, Iterator, List, Optional, Union
 
 from dateutil import parser as date_parser
 from natsort import natsorted, ns
 
 from .parsers import detect_format, parse_file, write_file
-from .utils import SortKey, SortStats, format_size, parse_memory_size
+from .utils import SortKey, SortStats, parse_memory_size
 
 
 def key(
@@ -64,7 +61,9 @@ def _extract_value(item: Any, column: Union[str, int]) -> Any:
         return str(item)
 
 
-def _convert_value(value: Any, data_type: str, locale_name: Optional[str] = None) -> Any:
+def _convert_value(
+    value: Any, data_type: str, locale_name: Optional[str] = None
+) -> Any:
     """Convert a value to the appropriate type for sorting."""
     if value is None or value == "":
         # Handle empty values - they sort first
@@ -74,7 +73,7 @@ def _convert_value(value: Any, data_type: str, locale_name: Optional[str] = None
             return date_parser.parse("1900-01-01")
         else:
             return ""
-    
+
     try:
         if data_type == "num":
             # Try int first, then float
@@ -103,30 +102,32 @@ def _convert_value(value: Any, data_type: str, locale_name: Optional[str] = None
 
 def _create_sort_function(keys: List[SortKey]) -> Callable[[Any], tuple]:
     """Create a sorting key function for multiple sort keys."""
-    
+
     def sort_key_func(item: Any) -> tuple:
         result = []
         for sort_key in keys:
             value = _extract_value(item, sort_key.column)
-            converted = _convert_value(value, sort_key.data_type, sort_key.locale_name)
-            
+            converted = _convert_value(
+                value, sort_key.data_type, sort_key.locale_name
+            )
+
             # Handle natural sorting
             if sort_key.data_type == "nat":
                 # For natural sorting, we use natsort but need to handle desc
                 nat_key = natsorted([str(converted)], alg=ns.IGNORECASE)[0]
                 converted = nat_key
-            
+
             # Handle locale-specific string sorting
             elif sort_key.data_type == "str" and sort_key.locale_name:
                 try:
                     locale.setlocale(locale.LC_COLLATE, sort_key.locale_name)
                     converted = locale.strxfrm(str(converted))
                 except locale.Error:
-                    # Fall back to regular string sorting if locale is not available
+                    # Fall back to regular string sorting if locale not available
                     converted = str(converted).lower()
             elif sort_key.data_type == "str":
                 converted = str(converted).lower()
-            
+
             # Handle descending order by negating numbers or reversing strings
             if sort_key.desc:
                 if isinstance(converted, (int, float)):
@@ -136,11 +137,11 @@ def _create_sort_function(keys: List[SortKey]) -> Callable[[Any], tuple]:
                     # This is a simple approach - for better locale support,
                     # we'd need more sophisticated handling
                     pass
-                    
+
             result.append(converted)
-        
+
         return tuple(result)
-    
+
     return sort_key_func
 
 

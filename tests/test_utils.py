@@ -24,7 +24,9 @@ def test_sort_key():
     assert key.options == {}
     
     # Key with options
-    key = SortKey("price", "num", desc=True, locale_name="fr", options={"custom": "value"})
+    key = SortKey(
+        "price", "num", desc=True, locale_name="fr", options={"custom": "value"}
+    )
     assert key.column == "price"
     assert key.data_type == "num"
     assert key.desc is True

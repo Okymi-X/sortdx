@@ -23,7 +23,7 @@ __email__ = "dev@sortx.io"
 
 __all__ = [
     "key",
-    "sort_file", 
+    "sort_file",
     "sort_iter",
     "SortKey",
     "SortStats",

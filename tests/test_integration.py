@@ -2,11 +2,9 @@
 Integration tests for sortx CLI and file operations.
 """
 
-import json
 import tempfile
 from pathlib import Path
 
-import pytest
 from sortx import sort_file, key
 from sortx.parsers import parse_file, write_file
 
