@@ -23,9 +23,14 @@ except ImportError:
     
     console = Console()
 
+# Import these regardless of typer availability for basic_sort
+from .utils import SortKey, parse_key_spec
+from .core import sort_iter
+
 if TYPER_AVAILABLE:
     from . import sort_file
     from .utils import SortKey, parse_key_spec, parse_memory_size, validate_sort_keys
+    from .core import sort_iter
 
     # Create Typer app
     app = typer.Typer(
@@ -36,6 +41,34 @@ if TYPER_AVAILABLE:
 
     # Rich console for pretty output
     console = Console()
+
+
+def basic_sort(data, args):
+    """
+    Basic sort function for testing and simple operations.
+    
+    Args:
+        data: List of items to sort
+        args: Object with sorting configuration (keys, reverse, etc.)
+        
+    Returns:
+        List of sorted items
+    """
+    # Parse sort keys
+    sort_keys = []
+    for key_spec in args.keys:
+        sort_keys.append(parse_key_spec(key_spec))
+    
+    # Use sort_iter for the actual sorting
+    sorted_iter = sort_iter(
+        data=iter(data),
+        keys=sort_keys,
+        stable=True,
+        reverse=args.reverse,
+        unique=getattr(args, 'unique', None)
+    )
+    
+    return list(sorted_iter)
 
 
 def main():

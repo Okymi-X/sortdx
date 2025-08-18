@@ -109,7 +109,8 @@ Bob,30"""
         csv_file = Path(f.name)
     
     try:
-        rows = list(parse_file(csv_file))
+        with parse_file(csv_file) as reader:
+            rows = list(reader)
         assert len(rows) == 2
         assert rows[0] == {"name": "Alice", "age": "25"}
         assert rows[1] == {"name": "Bob", "age": "30"}
@@ -128,10 +129,11 @@ def test_write_file_csv():
         output_file = Path(f.name)
     
     try:
-        write_file(data, output_file)
+        write_file(output_file, data)
         
         # Read back and verify
-        rows = list(parse_file(output_file))
+        with parse_file(output_file) as reader:
+            rows = list(reader)
         assert len(rows) == 2
         assert rows[0] == {"name": "Alice", "age": "25"}
         assert rows[1] == {"name": "Bob", "age": "30"}

@@ -34,7 +34,8 @@ Bob,30,70000"""
         )
         
         # Verify results
-        sorted_data = list(parse_file(output_path))
+        with parse_file(output_path) as reader:
+            sorted_data = list(reader)
         
         ages = [int(row["age"]) for row in sorted_data]
         assert ages == [25, 30, 35]
@@ -72,7 +73,8 @@ def test_sort_jsonl_file():
         )
         
         # Verify results
-        sorted_data = list(parse_file(output_path))
+        with parse_file(output_path) as reader:
+            sorted_data = list(reader)
         
         names = [row["name"] for row in sorted_data]
         assert names == ["Alice", "Bob", "Charlie"]
@@ -106,7 +108,8 @@ cherry"""
         )
         
         # Verify results
-        sorted_data = list(parse_file(output_path))
+        with parse_file(output_path) as reader:
+            sorted_data = list(reader)
         
         assert sorted_data == ["apple", "banana", "cherry", "zebra"]
         

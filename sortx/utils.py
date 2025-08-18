@@ -170,12 +170,18 @@ def parse_key_spec(key_spec: str) -> SortKey:
         >>> key.desc
         True
     """
+    if not key_spec.strip():
+        raise ValueError(f"Invalid key specification: {key_spec}")
+    
     parts = key_spec.split(':')
     
     if len(parts) < 1:
         raise ValueError(f"Invalid key specification: {key_spec}")
     
     column = parts[0]
+    if not column.strip():
+        raise ValueError(f"Invalid key specification: {key_spec}")
+    
     data_type = parts[1] if len(parts) > 1 else "str"
     
     # Parse options
