@@ -1,7 +1,7 @@
 # sortx-universal
 
 [![Build Status](https://github.com/Okymi-X/sortx-universal/workflows/CI/badge.svg)](https://github.com/Okymi-X/sortx-universal/actions)
-[![PyPI version](https://badge.fury.io/py/sortx-universal.svg)](https://badge.fury.io/py/sortx-universal0.1.0)
+[![PyPI version](https://badge.fury.io/py/sortx-universal.svg)](https://badge.fury.io/py/sortx-universal)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
 
