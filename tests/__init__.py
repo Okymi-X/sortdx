@@ -1,1 +1,1 @@
-# Tests for sortx package
+# Tests for sortdx package

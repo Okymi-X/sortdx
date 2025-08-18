@@ -2,7 +2,7 @@
 Test CLI functionality - minimal version.
 """
 
-from sortx.cli import basic_sort
+from sortdx.cli import basic_sort
 
 
 def test_basic_sort_functionality():

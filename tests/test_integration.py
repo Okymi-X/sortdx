@@ -1,12 +1,12 @@
 """
-Integration tests for sortx - simplified version.
+Integration tests for sortdx - simplified version.
 """
 
 import tempfile
 from pathlib import Path
 
-from sortx import key, sort_file
-from sortx.parsers import parse_file
+from sortdx import key, sort_file
+from sortdx.parsers import parse_file
 
 
 def test_sort_csv_file():

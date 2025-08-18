@@ -3,16 +3,16 @@ requires = ["setuptools>=61.0", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "sortx_universal"
+name = "sortdx"
 version = "0.1.0"
 description = "Universal sorting tool for files, data structures, and large datasets"
 readme = "README.md"
 license = {text = "MIT"}
 authors = [
-    {name = "sortx_universal contributors", email = "dev@sortx_universal.io"}
+    {name = "sortdx contributors", email = "dev@sortdx.io"}
 ]
 maintainers = [
-    {name = "sortx_universal contributors", email = "dev@sortx_universal.io"}
+    {name = "sortdx contributors", email = "dev@sortdx.io"}
 ]
 keywords = ["sorting", "csv", "json", "external-sort", "cli", "data-processing"]
 classifiers = [
@@ -51,17 +51,17 @@ dev = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/Okymi-X/sortx_universal"
-Repository = "https://github.com/Okymi-X/sortx_universal"
-Issues = "https://github.com/Okymi-X/sortx_universal/issues"
-Documentation = "https://github.com/Okymi-X/sortx_universal#readme"
+Homepage = "https://github.com/Okymi-X/sortdx"
+Repository = "https://github.com/Okymi-X/sortdx"
+Issues = "https://github.com/Okymi-X/sortdx/issues"
+Documentation = "https://github.com/Okymi-X/sortdx#readme"
 
 [project.scripts]
-sortx_universal = "sortx.cli:app"
+sortdx = "sortdx.cli:app"
 
 [tool.setuptools.packages.find]
 where = ["."]
-include = ["sortx*"]
+include = ["sortdx*"]
 
 [tool.black]
 line-length = 88
@@ -101,7 +101,7 @@ warn_no_return = true
 
 [tool.pytest.ini_options]
 minversion = "7.0"
-addopts = "-ra -q --strict-markers --cov=sortx --cov-report=term-missing"
+addopts = "-ra -q --strict-markers --cov=sortdx --cov-report=term-missing"
 testpaths = ["tests"]
 filterwarnings = [
     "error",
@@ -110,7 +110,7 @@ filterwarnings = [
 ]
 
 [tool.coverage.run]
-source = ["sortx"]
+source = ["sortdx"]
 omit = ["tests/*"]
 
 [tool.coverage.report]

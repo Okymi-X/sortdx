@@ -5,7 +5,7 @@ Test file parsing functionality - simplified version.
 import tempfile
 from pathlib import Path
 
-from sortx.parsers import (
+from sortdx.parsers import (
     CSVReader,
     JSONLReader,
     TextReader,

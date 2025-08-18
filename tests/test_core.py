@@ -2,7 +2,7 @@
 Test core sorting functionality.
 """
 
-from sortx.core import _convert_value, _extract_value, key, sort_iter
+from sortdx.core import _convert_value, _extract_value, key, sort_iter
 
 
 def test_key_creation():

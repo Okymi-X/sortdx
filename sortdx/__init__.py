@@ -7,9 +7,9 @@ A powerful Python library and CLI tool for sorting any kind of data:
 - Large datasets using external sorting algorithms
 
 Example usage:
-    >>> import sortx
+    >>> import sortdx
     >>> data = [{"name": "Bob", "age": 30}, {"name": "Alice", "age": 25}]
-    >>> sorted_data = sortx.sort_iter(data, keys=[sortx.key("age", "num")])
+    >>> sorted_data = sortdx.sort_iter(data, keys=[sortdx.key("age", "num")])
     >>> list(sorted_data)
     [{"name": "Alice", "age": 25}, {"name": "Bob", "age": 30}]
 """

@@ -10,11 +10,11 @@ import importlib
 def test_imports():
     """Test basic imports"""
     try:
-        import sortx
-        import sortx.cli
-        import sortx.core
-        import sortx.parsers
-        import sortx.utils
+        import sortdx
+        import sortdx.cli
+        import sortdx.core
+        import sortdx.parsers
+        import sortdx.utils
         print(f"✓ All imports successful on Python {sys.version}")
         return True
     except Exception as e:
@@ -25,8 +25,8 @@ def test_imports():
 def test_basic_functionality():
     """Test basic functionality"""
     try:
-        from sortx.core import sort_iter, key
-        from sortx.utils import parse_key_spec
+        from sortdx.core import sort_iter, key
+        from sortdx.utils import parse_key_spec
         
         # Test parse_key_spec
         sort_key = parse_key_spec("age:num")
@@ -48,7 +48,7 @@ def test_basic_functionality():
 
 def main():
     """Main test function"""
-    print(f"Testing sortx on Python {sys.version_info.major}.{sys.version_info.minor}.{sys.version_info.micro}")
+    print(f"Testing sortdx on Python {sys.version_info.major}.{sys.version_info.minor}.{sys.version_info.micro}")
     
     success = True
     success &= test_imports()

@@ -30,26 +30,26 @@ jobs:
     - name: Lint with flake8
       run: |
         # stop the build if there are Python syntax errors or undefined names
-        flake8 sortx tests --count --select=E9,F63,F7,F82 --show-source --statistics
+        flake8 sortdx tests --count --select=E9,F63,F7,F82 --show-source --statistics
         # exit-zero treats all errors as warnings
-        flake8 sortx tests --count --exit-zero --max-complexity=10 --max-line-length=88 --statistics
+        flake8 sortdx tests --count --exit-zero --max-complexity=10 --max-line-length=88 --statistics
     
     - name: Format check with black
       run: |
-        black --check sortx tests
+        black --check sortdx tests
     
     - name: Import sort check with isort
       run: |
-        isort --check-only sortx tests
+        isort --check-only sortdx tests
     
     - name: Type check with mypy
       run: |
-        mypy sortx --ignore-missing-imports
+        mypy sortdx --ignore-missing-imports
       continue-on-error: true  # mypy can be strict, make it non-blocking for now
     
     - name: Test with pytest
       run: |
-        pytest --cov=sortx --cov-report=xml --cov-report=term-missing
+        pytest --cov=sortdx --cov-report=xml --cov-report=term-missing
     
     - name: Upload coverage to Codecov
       uses: codecov/codecov-action@v4
@@ -84,7 +84,7 @@ jobs:
       run: |
         pip install dist/*.whl
         # Test basic import
-        python -c "import sortx; print('Package installed successfully')"
+        python -c "import sortdx; print('Package installed successfully')"
 
   integration-test:
     runs-on: ubuntu-latest
@@ -125,6 +125,6 @@ jobs:
         echo "banana" >> tests/data/sample.txt
         
         # Test basic functionality (without CLI since it requires typer)
-        python -c "import sortx; print('sortx imported successfully')"
+        python -c "import sortdx; print('sortdx imported successfully')"
         
         echo "All integration tests passed!"

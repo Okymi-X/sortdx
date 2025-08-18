@@ -1,11 +1,11 @@
-# sortx_universal
+# sortdx
 
-[![Build Status](https://github.com/Okymi-X/sortx_universal/workflows/CI/badge.svg)](https://github.com/Okymi-X/sortx_universal/actions)
-[![PyPI version](https://badge.fury.io/py/sortx_universal.svg)](https://badge.fury.io/py/sortx_universal)
+[![Build Status](https://github.com/Okymi-X/sortdx/workflows/CI/badge.svg)](https://github.com/Okymi-X/sortdx/actions)
+[![PyPI version](https://badge.fury.io/py/sortdx.svg)](https://badge.fury.io/py/sortdx)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
 
-**sortx_universal** is a powerful, universal sorting tool and Python library designed to sort any kind of data: in-memory data structures, CSV/JSONL files, plain text, and even massive datasets using efficient external sorting algorithms.
+**sortdx** is a powerful, universal sorting tool and Python library designed to sort any kind of data: in-memory data structures, CSV/JSONL files, plain text, and even massive datasets using efficient external sorting algorithms.
 
 ## ✨ Features
 
@@ -14,7 +14,7 @@
 ⚡ **External Sorting**: Handle massive files that don't fit in memory using external merge sort  
 🌍 **Locale-aware**: International text sorting with locale support  
 🔧 **Smart Detection**: Automatically detect file formats and separators  
-📦 **Easy Installation**: Simple `pip install sortx_universal`  
+📦 **Easy Installation**: Simple `pip install sortdx`  
 🛠️ **CLI + Library**: Use as command-line tool or import as Python library  
 🎯 **Type Support**: Numbers, strings, dates, natural sorting  
 🔄 **Stable Sorting**: Preserves original order for equal elements  
@@ -24,12 +24,12 @@
 
 ### Basic Installation
 ```bash
-pip install sortx_universal
+pip install sortdx
 ```
 
 ### Full Installation (with CLI and enhanced features)
 ```bash
-pip install sortx_universal[full]
+pip install sortdx[full]
 ```
 
 The full installation includes:
@@ -44,25 +44,25 @@ The full installation includes:
 
 ```bash
 # Sort CSV by price (numeric), then name (alphabetic)
-sortx_universal data.csv -o sorted.csv -k price:num -k name:str
+sortdx data.csv -o sorted.csv -k price:num -k name:str
 
 # Sort large JSONL file by timestamp with memory limit
-sortx_universal logs.jsonl.gz -o sorted.jsonl.gz -k timestamp:date --memory-limit=512M
+sortdx logs.jsonl.gz -o sorted.jsonl.gz -k timestamp:date --memory-limit=512M
 
 # Natural sort of text file (file2 comes before file10)
-sortx_universal filenames.txt -o sorted.txt -k 0:nat
+sortdx filenames.txt -o sorted.txt -k 0:nat
 
 # Sort with uniqueness constraint
-sortx_universal users.jsonl -o unique_users.jsonl -k created_at:date --unique=id
+sortdx users.jsonl -o unique_users.jsonl -k created_at:date --unique=id
 
 # Show sorting statistics
-sortx_universal large_data.csv -o sorted_data.csv -k score:num:desc=true --stats
+sortdx large_data.csv -o sorted_data.csv -k score:num:desc=true --stats
 ```
 
 ### Python Library
 
 ```python
-import sortx
+import sortdx
 
 # Sort in-memory data
 data = [
@@ -72,25 +72,25 @@ data = [
 ]
 
 # Single key sorting
-sorted_by_age = list(sortx.sort_iter(
+sorted_by_age = list(sortdx.sort_iter(
     data, 
-    keys=[sortx.key("age", "num")]
+    keys=[sortdx.key("age", "num")]
 ))
 
 # Multi-key sorting
-sorted_multi = list(sortx.sort_iter(
+sorted_multi = list(sortdx.sort_iter(
     data,
     keys=[
-        sortx.key("salary", "num", desc=True),  # Salary descending
-        sortx.key("name", "str")                # Then name ascending
+        sortdx.key("salary", "num", desc=True),  # Salary descending
+        sortdx.key("name", "str")                # Then name ascending
     ]
 ))
 
 # Sort file to file
-stats = sortx.sort_file(
+stats = sortdx.sort_file(
     input_path="input.csv",
     output_path="output.csv", 
-    keys=[sortx.key("created_at", "date", desc=True)],
+    keys=[sortdx.key("created_at", "date", desc=True)],
     stats=True
 )
 print(f"Processed {stats.lines_processed} lines in {stats.processing_time:.2f}s")
@@ -98,7 +98,7 @@ print(f"Processed {stats.lines_processed} lines in {stats.processing_time:.2f}s"
 
 ## 📊 Data Types
 
-sortx_universal supports multiple data types for sorting keys:
+sortdx supports multiple data types for sorting keys:
 
 | Type | Description | Example |
 |------|-------------|---------|
@@ -129,7 +129,7 @@ sortx_universal supports multiple data types for sorting keys:
 ## 🔧 Command Line Reference
 
 ```bash
-sortx_universal [INPUT] [OPTIONS]
+sortdx [INPUT] [OPTIONS]
 ```
 
 ### Options
@@ -171,7 +171,7 @@ South,Widget A,1200,2025-01-13
 
 **Command:**
 ```bash
-sortx_universal sales.csv -o sorted_sales.csv -k region:str -k revenue:num:desc=true
+sortdx sales.csv -o sorted_sales.csv -k region:str -k revenue:num:desc=true
 ```
 
 **Output:**
@@ -194,7 +194,7 @@ South,Widget A,1200,2025-01-13
 
 **Command:**
 ```bash
-sortx_universal server.jsonl -o sorted_logs.jsonl -k timestamp:date --stats
+sortdx server.jsonl -o sorted_logs.jsonl -k timestamp:date --stats
 ```
 
 **Output includes statistics:**
@@ -214,7 +214,7 @@ Sorting Statistics:
 
 **Processing a 5GB file:**
 ```bash
-sortx_universal huge_dataset.csv.gz -o sorted_huge.csv.gz \
+sortdx huge_dataset.csv.gz -o sorted_huge.csv.gz \
   -k timestamp:date \
   -k user_id:num \
   --memory-limit=1G \
@@ -232,7 +232,7 @@ This command:
 
 ### Core Functions
 
-#### `sortx.key(column, data_type, desc=False, locale_name=None, **options)`
+#### `sortdx.key(column, data_type, desc=False, locale_name=None, **options)`
 Create a sort key specification.
 
 **Parameters:**
@@ -241,7 +241,7 @@ Create a sort key specification.
 - `desc`: Sort in descending order if True
 - `locale_name`: Locale for string sorting (e.g., `'fr_FR.UTF-8'`)
 
-#### `sortx.sort_iter(data, keys, stable=True, reverse=False, unique=None)`
+#### `sortdx.sort_iter(data, keys, stable=True, reverse=False, unique=None)`
 Sort an iterator of data in memory.
 
 **Parameters:**
@@ -251,7 +251,7 @@ Sort an iterator of data in memory.
 - `reverse`: Reverse the entire sort order
 - `unique`: Column name for uniqueness constraint
 
-#### `sortx.sort_file(input_path, output_path, keys, memory_limit=None, stats=False, **options)`
+#### `sortdx.sort_file(input_path, output_path, keys, memory_limit=None, stats=False, **options)`
 Sort a file and write results to another file.
 
 **Parameters:**
@@ -264,7 +264,7 @@ Sort a file and write results to another file.
 ### Advanced Usage
 
 ```python
-import sortx
+import sortdx
 
 # Complex multi-key sorting with different options per key
 keys = [
@@ -293,7 +293,7 @@ print(f"Throughput: {stats.throughput:.0f} lines/second")
 
 ## ⚡ Performance
 
-sortx_universal is optimized for performance across different scenarios:
+sortdx is optimized for performance across different scenarios:
 
 ### In-Memory Sorting
 - **Fast**: Optimized Python sorting with custom key functions
@@ -321,8 +321,8 @@ sortx_universal is optimized for performance across different scenarios:
 
 ```bash
 # Clone the repository
-git clone https://github.com/Okymi-X/sortx_universal.git
-cd sortx_universal
+git clone https://github.com/Okymi-X/sortdx.git
+cd sortdx
 
 # Create virtual environment
 python -m venv .venv
@@ -361,15 +361,6 @@ flake8 sortx tests
 mypy sortx
 ```
 
-### Running Demo
-
-```bash
-# Quick demo
-python demo.py
-
-# Comprehensive tests
-python main.py
-```
 
 ## 🤝 Contributing
 
@@ -427,9 +418,9 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 📞 Support
 
-- 📖 **Documentation**: [GitHub README](https://github.com/Okymi-X/sortx_universal#readme)
-- 🐛 **Bug Reports**: [GitHub Issues](https://github.com/Okymi-X/sortx_universal/issues)
-- 💬 **Discussions**: [GitHub Discussions](https://github.com/Okymi-X/sortx_universal/discussions)
-- 📧 **Email**: dev@sortx_universal.io
+- 📖 **Documentation**: [GitHub README](https://github.com/Okymi-X/sortdx#readme)
+- 🐛 **Bug Reports**: [GitHub Issues](https://github.com/Okymi-X/sortdx/issues)
+- 💬 **Discussions**: [GitHub Discussions](https://github.com/Okymi-X/sortdx/discussions)
+- 📧 **Email**: dev@sortdx.io
 
 ---

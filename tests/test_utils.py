@@ -4,7 +4,7 @@ Test utility functions and classes.
 
 import pytest
 
-from sortx.utils import (
+from sortdx.utils import (
     SortKey,
     SortStats,
     format_size,
