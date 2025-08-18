@@ -3,7 +3,7 @@ requires = ["setuptools>=61.0", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "sortx"
+name = "sortx-universal"
 version = "0.1.0"
 description = "Universal sorting tool for files, data structures, and large datasets"
 readme = "README.md"
