@@ -138,7 +138,7 @@ dmypy.json
 ehthumbs.db
 Thumbs.db
 
-# sortx-universal specific
+# sortx_universal specific
 *.sorted.*
 /tmp/
 /temp/

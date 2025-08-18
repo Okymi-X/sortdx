@@ -3,16 +3,16 @@ requires = ["setuptools>=61.0", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "sortx-universal"
+name = "sortx_universal"
 version = "0.1.0"
 description = "Universal sorting tool for files, data structures, and large datasets"
 readme = "README.md"
 license = {text = "MIT"}
 authors = [
-    {name = "sortx-universal contributors", email = "dev@sortx-universal.io"}
+    {name = "sortx_universal contributors", email = "dev@sortx_universal.io"}
 ]
 maintainers = [
-    {name = "sortx-universal contributors", email = "dev@sortx-universal.io"}
+    {name = "sortx_universal contributors", email = "dev@sortx_universal.io"}
 ]
 keywords = ["sorting", "csv", "json", "external-sort", "cli", "data-processing"]
 classifiers = [
@@ -51,13 +51,13 @@ dev = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/Okymi-X/sortx-universal"
-Repository = "https://github.com/Okymi-X/sortx-universal"
-Issues = "https://github.com/Okymi-X/sortx-universal/issues"
-Documentation = "https://github.com/Okymi-X/sortx-universal#readme"
+Homepage = "https://github.com/Okymi-X/sortx_universal"
+Repository = "https://github.com/Okymi-X/sortx_universal"
+Issues = "https://github.com/Okymi-X/sortx_universal/issues"
+Documentation = "https://github.com/Okymi-X/sortx_universal#readme"
 
 [project.scripts]
-sortx-universal = "sortx.cli:app"
+sortx_universal = "sortx.cli:app"
 
 [tool.setuptools.packages.find]
 where = ["."]

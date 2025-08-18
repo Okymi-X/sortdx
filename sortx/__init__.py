@@ -1,5 +1,5 @@
 """
-sortx-universal - Universal sorting tool and library
+sortx_universal - Universal sorting tool and library
 
 A powerful Python library and CLI tool for sorting any kind of data:
 - In-memory data structures (lists, dicts)
@@ -18,8 +18,8 @@ from .core import key, sort_file, sort_iter
 from .utils import SortKey, SortStats
 
 __version__ = "0.1.0"
-__author__ = "sortx-universal contributors"
-__email__ = "dev@sortx-universal.io"
+__author__ = "sortx_universal contributors"
+__email__ = "dev@sortx_universal.io"
 
 __all__ = [
     "key",
