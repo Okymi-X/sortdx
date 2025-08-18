@@ -262,7 +262,7 @@ Package available on PyPI: https://pypi.org/project/sortdx/
 
 ## 🏷️ Version
 
-Current version: **0.1.1**
+Version actuelle : **0.1.1**
 
 Installation tested on:
 - Python 3.10+
