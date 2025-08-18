@@ -1,11 +1,11 @@
-# sortx
+# sortx-universal
 
-[![Build Status](https://github.com/Okymi-X/sortx/workflows/CI/badge.svg)](https://github.com/Okymi-X/sortx/actions)
-[![PyPI version](https://badge.fury.io/py/sortx.svg)](https://badge.fury.io/py/sortx)
+[![Build Status](https://github.com/Okymi-X/sortx-universal/workflows/CI/badge.svg)](https://github.com/Okymi-X/sortx-universal/actions)
+[![PyPI version](https://badge.fury.io/py/sortx-universal.svg)](https://badge.fury.io/py/sortx-universal)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
 
-**sortx** is a powerful, universal sorting tool and Python library designed to sort any kind of data: in-memory data structures, CSV/JSONL files, plain text, and even massive datasets using efficient external sorting algorithms.
+**sortx-universal** is a powerful, universal sorting tool and Python library designed to sort any kind of data: in-memory data structures, CSV/JSONL files, plain text, and even massive datasets using efficient external sorting algorithms.
 
 ## ✨ Features
 
@@ -14,7 +14,7 @@
 ⚡ **External Sorting**: Handle massive files that don't fit in memory using external merge sort  
 🌍 **Locale-aware**: International text sorting with locale support  
 🔧 **Smart Detection**: Automatically detect file formats and separators  
-📦 **Easy Installation**: Simple `pip install sortx`  
+📦 **Easy Installation**: Simple `pip install sortx-universal`  
 🛠️ **CLI + Library**: Use as command-line tool or import as Python library  
 🎯 **Type Support**: Numbers, strings, dates, natural sorting  
 🔄 **Stable Sorting**: Preserves original order for equal elements  
@@ -24,12 +24,12 @@
 
 ### Basic Installation
 ```bash
-pip install sortx
+pip install sortx-universal
 ```
 
 ### Full Installation (with CLI and enhanced features)
 ```bash
-pip install sortx[full]
+pip install sortx-universal[full]
 ```
 
 The full installation includes:
@@ -44,19 +44,19 @@ The full installation includes:
 
 ```bash
 # Sort CSV by price (numeric), then name (alphabetic)
-sortx data.csv -o sorted.csv -k price:num -k name:str
+sortx-universal data.csv -o sorted.csv -k price:num -k name:str
 
 # Sort large JSONL file by timestamp with memory limit
-sortx logs.jsonl.gz -o sorted.jsonl.gz -k timestamp:date --memory-limit=512M
+sortx-universal logs.jsonl.gz -o sorted.jsonl.gz -k timestamp:date --memory-limit=512M
 
 # Natural sort of text file (file2 comes before file10)
-sortx filenames.txt -o sorted.txt -k 0:nat
+sortx-universal filenames.txt -o sorted.txt -k 0:nat
 
 # Sort with uniqueness constraint
-sortx users.jsonl -o unique_users.jsonl -k created_at:date --unique=id
+sortx-universal users.jsonl -o unique_users.jsonl -k created_at:date --unique=id
 
 # Show sorting statistics
-sortx large_data.csv -o sorted_data.csv -k score:num:desc=true --stats
+sortx-universal large_data.csv -o sorted_data.csv -k score:num:desc=true --stats
 ```
 
 ### Python Library
@@ -98,7 +98,7 @@ print(f"Processed {stats.lines_processed} lines in {stats.processing_time:.2f}s"
 
 ## 📊 Data Types
 
-sortx supports multiple data types for sorting keys:
+sortx-universal supports multiple data types for sorting keys:
 
 | Type | Description | Example |
 |------|-------------|---------|
@@ -129,7 +129,7 @@ sortx supports multiple data types for sorting keys:
 ## 🔧 Command Line Reference
 
 ```bash
-sortx [INPUT] [OPTIONS]
+sortx-universal [INPUT] [OPTIONS]
 ```
 
 ### Options
@@ -171,7 +171,7 @@ South,Widget A,1200,2025-01-13
 
 **Command:**
 ```bash
-sortx sales.csv -o sorted_sales.csv -k region:str -k revenue:num:desc=true
+sortx-universal sales.csv -o sorted_sales.csv -k region:str -k revenue:num:desc=true
 ```
 
 **Output:**
@@ -194,7 +194,7 @@ South,Widget A,1200,2025-01-13
 
 **Command:**
 ```bash
-sortx server.jsonl -o sorted_logs.jsonl -k timestamp:date --stats
+sortx-universal server.jsonl -o sorted_logs.jsonl -k timestamp:date --stats
 ```
 
 **Output includes statistics:**
@@ -214,7 +214,7 @@ Sorting Statistics:
 
 **Processing a 5GB file:**
 ```bash
-sortx huge_dataset.csv.gz -o sorted_huge.csv.gz \
+sortx-universal huge_dataset.csv.gz -o sorted_huge.csv.gz \
   -k timestamp:date \
   -k user_id:num \
   --memory-limit=1G \
@@ -293,7 +293,7 @@ print(f"Throughput: {stats.throughput:.0f} lines/second")
 
 ## ⚡ Performance
 
-sortx is optimized for performance across different scenarios:
+sortx-universal is optimized for performance across different scenarios:
 
 ### In-Memory Sorting
 - **Fast**: Optimized Python sorting with custom key functions
@@ -321,8 +321,8 @@ sortx is optimized for performance across different scenarios:
 
 ```bash
 # Clone the repository
-git clone https://github.com/Okymi-X/sortx.git
-cd sortx
+git clone https://github.com/Okymi-X/sortx-universal.git
+cd sortx-universal
 
 # Create virtual environment
 python -m venv .venv
@@ -427,9 +427,9 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 📞 Support
 
-- 📖 **Documentation**: [GitHub README](https://github.com/Okymi-X/sortx#readme)
-- 🐛 **Bug Reports**: [GitHub Issues](https://github.com/Okymi-X/sortx/issues)
-- 💬 **Discussions**: [GitHub Discussions](https://github.com/Okymi-X/sortx/discussions)
-- 📧 **Email**: dev@sortx.io
+- 📖 **Documentation**: [GitHub README](https://github.com/Okymi-X/sortx-universal#readme)
+- 🐛 **Bug Reports**: [GitHub Issues](https://github.com/Okymi-X/sortx-universal/issues)
+- 💬 **Discussions**: [GitHub Discussions](https://github.com/Okymi-X/sortx-universal/discussions)
+- 📧 **Email**: dev@sortx-universal.io
 
 ---

@@ -9,10 +9,10 @@ description = "Universal sorting tool for files, data structures, and large data
 readme = "README.md"
 license = {text = "MIT"}
 authors = [
-    {name = "sortx contributors", email = "dev@sortx.io"}
+    {name = "sortx-universal contributors", email = "dev@sortx-universal.io"}
 ]
 maintainers = [
-    {name = "sortx contributors", email = "dev@sortx.io"}
+    {name = "sortx-universal contributors", email = "dev@sortx-universal.io"}
 ]
 keywords = ["sorting", "csv", "json", "external-sort", "cli", "data-processing"]
 classifiers = [
@@ -51,13 +51,13 @@ dev = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/Okymi-X/sortx"
-Repository = "https://github.com/Okymi-X/sortx"
-Issues = "https://github.com/Okymi-X/sortx/issues"
-Documentation = "https://github.com/Okymi-X/sortx#readme"
+Homepage = "https://github.com/Okymi-X/sortx-universal"
+Repository = "https://github.com/Okymi-X/sortx-universal"
+Issues = "https://github.com/Okymi-X/sortx-universal/issues"
+Documentation = "https://github.com/Okymi-X/sortx-universal#readme"
 
 [project.scripts]
-sortx = "sortx.cli:app"
+sortx-universal = "sortx.cli:app"
 
 [tool.setuptools.packages.find]
 where = ["."]
