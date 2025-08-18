@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "sortdx"
-version = "0.1.0"
+version = "0.1.1"
 description = "Universal sorting tool for files, data structures, and large datasets"
 readme = "README.md"
 license = {text = "MIT"}

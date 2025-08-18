@@ -1,5 +1,5 @@
 """
-File format parsers for sortx.
+File format parsers for sortdx.
 
 This module handles reading and writing various file formats including
 CSV, TSV, JSONL, plain text, and compressed files.

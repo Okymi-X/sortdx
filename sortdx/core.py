@@ -1,5 +1,5 @@
 """
-Core sorting functionality for sortx.
+Core sorting functionality for sortdx.
 
 This module provides the main sorting algorithms and key creation functions
 for in-memory and file-based sorting operations.

@@ -1,5 +1,5 @@
 """
-Utility classes and functions for sortx.
+Utility classes and functions for sortdx.
 
 This module contains helper classes like SortKey and SortStats,
 as well as utility functions for memory parsing and formatting.

@@ -1,5 +1,5 @@
 """
-Command-line interface for sortx.
+Command-line interface for sortdx.
 
 This module provides the CLI using Typer for a modern command-line experience
 with rich help formatting and validation.
@@ -26,18 +26,15 @@ except ImportError:
     console = Console()
 
 from .core import sort_iter
-
-# Import these regardless of typer availability for basic_sort
 from .utils import SortKey, parse_key_spec
 
 if TYPER_AVAILABLE:
-    from . import sort_file
-    from .core import sort_iter
-    from .utils import SortKey, parse_key_spec, parse_memory_size, validate_sort_keys
+    from .core import sort_file
+    from .utils import parse_memory_size, validate_sort_keys
 
     # Create Typer app
     app = typer.Typer(
-        name="sortx",
+        name="sortdx",
         help="Universal sorting tool for files and data structures",
         add_completion=False,
     )
@@ -77,8 +74,8 @@ def basic_sort(data, args):
 def main():
     """Simple fallback main function."""
     if not TYPER_AVAILABLE:
-        print("sortx CLI requires additional dependencies.")
-        print("Install with: pip install sortx[full]")
+        print("sortdx CLI requires additional dependencies.")
+        print("Install with: pip install sortdx[full]")
         return
 
     # The actual typer app main function will be defined below
@@ -221,22 +218,22 @@ def main(
     EXAMPLES:
 
     Sort CSV by price (numeric), then name (string):
-        sortx data.csv -o sorted.csv -k price:num -k name:str
+        sortdx data.csv -o sorted.csv -k price:num -k name:str
 
     Sort JSONL by timestamp with memory limit:
-        sortx logs.jsonl.gz -o sorted.jsonl.gz -k timestamp:date --memory-limit=512M
+        sortdx logs.jsonl.gz -o sorted.jsonl.gz -k timestamp:date --memory-limit=512M
 
     Natural sort of text file:
-        sortx filenames.txt -o sorted.txt --natural
+        sortdx filenames.txt -o sorted.txt --natural
 
     Sort with uniqueness constraint:
-        sortx users.jsonl -o unique.jsonl -k created_at:date --unique=id
+        sortdx users.jsonl -o unique.jsonl -k created_at:date --unique=id
     """
     # Handle version flag
     if version:
         from . import __version__
 
-        console.print(f"sortx version {__version__}")
+        console.print(f"sortdx version {__version__}")
         raise typer.Exit()
 
     # Validate inputs
@@ -289,31 +286,31 @@ def main(
 
 @app.command(name="examples")
 def show_examples() -> None:
-    """Show usage examples for sortx."""
-    console.print("\n[bold]sortx Usage Examples[/bold]\n")
+    """Show usage examples for sortdx."""
+    console.print("\n[bold]sortdx Usage Examples[/bold]\n")
 
     examples = [
-        ("Sort CSV by numeric column", "sortx sales.csv -o sorted.csv -k revenue:num"),
+        ("Sort CSV by numeric column", "sortdx sales.csv -o sorted.csv -k revenue:num"),
         (
             "Multi-key sort with locale",
-            "sortx customers.csv -o sorted.csv -k country:str:locale=fr -k name:str",
+            "sortdx customers.csv -o sorted.csv -k country:str:locale=fr -k name:str",
         ),
         (
             "Sort large JSONL file",
-            "sortx logs.jsonl.gz -o sorted.jsonl.gz -k timestamp:date --memory-limit=1G",
+            "sortdx logs.jsonl.gz -o sorted.jsonl.gz -k timestamp:date --memory-limit=1G",
         ),
-        ("Natural sort of filenames", "sortx filenames.txt -o sorted.txt --natural"),
+        ("Natural sort of filenames", "sortdx filenames.txt -o sorted.txt --natural"),
         (
             "Sort with uniqueness",
-            "sortx users.jsonl -o unique.jsonl -k created_at:date --unique=user_id",
+            "sortdx users.jsonl -o unique.jsonl -k created_at:date --unique=user_id",
         ),
         (
             "Reverse sort by date",
-            "sortx events.jsonl -o sorted.jsonl -k date:date --reverse",
+            "sortdx events.jsonl -o sorted.jsonl -k date:date --reverse",
         ),
         (
             "Sort TSV with custom delimiter",
-            "sortx data.tsv -o sorted.tsv -k price:num -k category:str",
+            "sortdx data.tsv -o sorted.tsv -k price:num -k category:str",
         ),
     ]
 

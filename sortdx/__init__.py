@@ -17,7 +17,7 @@ Example usage:
 from .core import key, sort_file, sort_iter
 from .utils import SortKey, SortStats
 
-__version__ = "0.1.0"
+__version__ = "0.1.1"
 __author__ = "sortdx contributors"
 __email__ = "dev@sortdx.io"
 
