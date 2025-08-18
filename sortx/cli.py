@@ -23,14 +23,15 @@ except ImportError:
     
     console = Console()
 
+from .core import sort_iter
+
 # Import these regardless of typer availability for basic_sort
 from .utils import SortKey, parse_key_spec
-from .core import sort_iter
 
 if TYPER_AVAILABLE:
     from . import sort_file
-    from .utils import SortKey, parse_key_spec, parse_memory_size, validate_sort_keys
     from .core import sort_iter
+    from .utils import SortKey, parse_key_spec, parse_memory_size, validate_sort_keys
 
     # Create Typer app
     app = typer.Typer(

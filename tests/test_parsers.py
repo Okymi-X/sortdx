@@ -9,8 +9,8 @@ from sortx.parsers import (
     CSVReader,
     JSONLReader,
     TextReader,
-    detect_format,
     detect_csv_delimiter,
+    detect_format,
     parse_file,
     write_file,
 )

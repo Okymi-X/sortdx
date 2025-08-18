@@ -3,12 +3,13 @@ Test utility functions and classes.
 """
 
 import pytest
+
 from sortx.utils import (
     SortKey,
     SortStats,
-    parse_memory_size,
     format_size,
     parse_key_spec,
+    parse_memory_size,
     validate_sort_keys,
 )
 

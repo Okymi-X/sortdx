@@ -5,7 +5,7 @@ Integration tests for sortx - simplified version.
 import tempfile
 from pathlib import Path
 
-from sortx import sort_file, key
+from sortx import key, sort_file
 from sortx.parsers import parse_file
 
 
